@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AutoMailDrive</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .box {
+      background: white;
+      display: inline-block;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #3367D6;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>📩 AutoMailDrive</h2>
+    <p>Connect your Gmail to automatically upload attachments to your Drive</p>
+    <form action="/authorize" method="POST">
+      <input type="email" name="email" placeholder="Enter your Gmail..." required><br><br>
+      <button type="submit">Connect</button>
+    </form>
+  </div>
+</body>
+</html>
