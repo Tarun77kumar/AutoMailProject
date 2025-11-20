@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
 from db import save_user
+from db import get_user
 
 load_dotenv()
 
@@ -27,16 +28,19 @@ SCOPES = [
 def authorize_user():
     """
     Google OAuth ka flow start karta hai.
-    Steps:
-    1. user ka email leta hai
-    2. OAuth flow create karta hai
-    3. consent + account select force karta hai
-    4. Google OAuth page par redirect kar deta hai
+    Pahle check karta hai ki user pehle se exist karta hai ya nahi.
     """
     email = request.form.get("email")
     if not email:
         return "Email is required", 400
 
+    #  Check if user already exists
+    user = get_user(email)
+    if user:
+        # User already connected
+        return f"<h3>⚠️ This service is already started on this <b>{email}</b></h3>"
+
+    # NEW USER → Start OAuth
     flow = Flow.from_client_config({
         "web": {
             "client_id": CLIENT_ID,
@@ -55,6 +59,7 @@ def authorize_user():
     )
 
     return redirect(auth_url)
+
 
 
 def oauth_callback():
