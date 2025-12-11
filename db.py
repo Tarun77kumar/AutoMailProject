@@ -1,6 +1,6 @@
 import sqlite3
 
-DB = "automail.db"
+DB = "data/automail.db"
 
 
 def init_db():
